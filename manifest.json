@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "COVID-19 Stats",
+    "version": "1.0",
+
+    "default_locale": "en",
+    "description": "Provides statistics about the COVID-19 pandemic",
+
+    "homepage_url": "https://github.com/abhishekbabu/covid19-stats-extension",
+
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": ["storage"],
+    "page_action": {
+        "default_popup": "popup.html"
+    }
+  }

@@ -14,7 +14,14 @@ async function GetCountryList() {
   try {
     let response = await fetch(COUNTRIES_URL);
     let parsed = await response.json();
-    console.log(parsed)
+    console.log(parsed);
+    let nameList = [];
+    for (const countryData in parsed) {
+      nameList.push(parsed[countryData].Country);
+    }
+    
+    console.log(nameList);
+    chrome.storage.sync.set({"countryList": nameList});
   } catch (err) {
     console.log(err.message)
   }

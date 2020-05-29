@@ -1,13 +1,8 @@
-const COUNTRIES_URL = "https://api.covid19api.com/countries";
-const COUNTRY_DATA_URL = "https://api.covid19api.com/total/country";
-const USA_STATES_URL = "https://disease.sh/v2/historical/usacounties";
+const COUNTRIES_URL = "https://disease.sh/v2/countries";
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("installed");
   GetCountryList();
-  GetCountryData("united-states")
-  GetUSAStateList();
-  GetUSAStateData("washington");
 });
 
 async function GetCountryList() {
@@ -16,8 +11,8 @@ async function GetCountryList() {
     let parsed = await response.json();
     console.log(parsed);
     let unsorted = {};
-    for (const countryData in parsed) {
-      unsorted[parsed[countryData].Country] = parsed[countryData].Slug;
+    for (const model in parsed) {
+      unsorted[parsed[model].country] = parsed[model].countryInfo.iso3;
     }
 
     var keys = Object.keys(unsorted);
@@ -33,36 +28,6 @@ async function GetCountryList() {
     
     console.log(countryList);
     chrome.storage.sync.set({"countryList": countryList});
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-
-async function GetCountryData(country) {
-  try {
-    let response = await fetch(`${COUNTRY_DATA_URL}/` + country);
-    let parsed = await response.json();
-    console.log(parsed[parsed.length-1])
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-
-async function GetUSAStateList() {
-  try {
-    let response = await fetch(USA_STATES_URL);
-    let parsed = await response.json();
-    console.log(parsed)
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-
-async function GetUSAStateData(state) {
-  try {
-    let response = await fetch(`${USA_STATES_URL}/` + state);
-    let parsed = await response.json();
-    console.log(parsed)
   } catch (err) {
     console.log(err.message)
   }

@@ -15,13 +15,24 @@ async function GetCountryList() {
     let response = await fetch(COUNTRIES_URL);
     let parsed = await response.json();
     console.log(parsed);
-    let nameList = [];
+    let unsorted = {};
     for (const countryData in parsed) {
-      nameList.push(parsed[countryData].Country);
+      unsorted[parsed[countryData].Country] = parsed[countryData].Slug;
+    }
+
+    var keys = Object.keys(unsorted);
+    keys.sort();
+
+    var countryList = {};
+
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var value = unsorted[key];
+      countryList[key] = value;
     }
     
-    console.log(nameList);
-    chrome.storage.sync.set({"countryList": nameList});
+    console.log(countryList);
+    chrome.storage.sync.set({"countryList": countryList});
   } catch (err) {
     console.log(err.message)
   }
@@ -31,7 +42,7 @@ async function GetCountryData(country) {
   try {
     let response = await fetch(`${COUNTRY_DATA_URL}/` + country);
     let parsed = await response.json();
-    console.log(parsed)
+    console.log(parsed[parsed.length-1])
   } catch (err) {
     console.log(err.message)
   }

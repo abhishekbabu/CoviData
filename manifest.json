@@ -17,7 +17,7 @@
     "scripts": ["js/background.js"],
     "persistent": false
   },
-  "permissions": ["alarms", "storage", "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"],
+  "permissions": ["alarms", "storage"],
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_icon": {
@@ -26,7 +26,5 @@
       "48": "assets/covid-stats48.png",
       "128": "assets/covid-stats128.png"
     }
-  },
-  
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://unpkg.com; object-src 'self'"
+  }
 }

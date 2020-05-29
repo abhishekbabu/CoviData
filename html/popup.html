@@ -5,8 +5,8 @@
     <title>COVID-19 Stats Tracker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-
     <script src="../js/popup.js"></script>
+    <link rel="stylesheet" href="../css/popup.css">
   </head>
 
   <body>
@@ -15,6 +15,8 @@
     <select id="countrySel">
       <option value="" disable selected hidden>Select a country...</option>
     </select>
+    <p id="loading"></p>
+    <img id="flag" style="border: 2px solid black;">
     <ul>
       <li id="active">Active: -</li>
       <li id="cases">Cases: -</li>

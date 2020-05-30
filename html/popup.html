@@ -7,16 +7,26 @@
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     <script src="../js/popup.js"></script>
     <link rel="stylesheet" href="../css/popup.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
   </head>
 
   <body>
     <header>COVID-19 Stats</header>
-    <label>Select a Country:</label>
-    <select id="countrySel">
-      <option value="" disable selected hidden>Select a country...</option>
-    </select>
+    <div>
+      <label id="countrySelectLabel">Select a Country:</label>
+      <select id="countrySel">
+        <option value="" disable selected hidden>Select a country...</option>
+      </select>
+    </div>
     <p id="loading"></p>
-    <img id="flag" style="border: 2px solid black;">
+
+    <div class="wrapper">
+      <div class="ploty">
+        <svg width="600" height="500"></svg>
+      </div>
+      <img class="overlay" id="flag" style="border: 2px solid black;" alt="Image" height="25" width="40">
+    </div>
+
     <ul>
       <li id="active">Active: -</li>
       <li id="cases">Cases: -</li>

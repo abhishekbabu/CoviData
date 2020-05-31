@@ -5,26 +5,26 @@
     <title>COVID-19 Stats Tracker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="../js/popup.js"></script>
     <link rel="stylesheet" href="../css/popup.css">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Pontano Sans' rel='stylesheet'>
   </head>
 
   <body>
     <header>COVID-19 Stats</header>
-    <div>
-      <label id="countrySelectLabel">Select a Country:</label>
-      <select id="countrySel">
-        <option value="" disable selected hidden>Select a country...</option>
-      </select>
-    </div>
-    <p id="loading"></p>
+    <br>
+    <label id="countrySelectLabel">Select a Country:&emsp;&nbsp;</label>
+    <select id="countrySel">
+      <option value="" disable selected hidden>Select a country...</option>
+    </select>
+    <p id="loading">&nbsp;</p>
 
     <div class="wrapper">
       <div class="ploty">
-        <svg width="600" height="500"></svg>
+        <svg id="chart" width="500" height="350"></svg>
       </div>
-      <img class="overlay" id="flag" style="border: 2px solid black;" alt="Image" height="25" width="40">
+      <img class="overlay" id="flag" alt="Image" height="50" width="auto">
     </div>
 
     <ul>

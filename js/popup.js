@@ -69,13 +69,18 @@ function loadBarGraph() {
     var g = svg.append("g")
                .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-    d3.csv("../js/XYZ.csv", function(error, data) {
-        // if (error) {
-        //     throw error;
-        // }
+    console.log("Made it to right before .csv()");
+    d3.csv("/js/XYZ.csv", function(error, data) {
+        console.log("Made it into .csv()");
+        if (error) {
+            console.log("Threw an error in .csv()");
+            throw error;
+        }
 
         xScale.domain(data.map(function(d) { return d.year; }));
+        console.log(xScale);
         yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+        console.log(yScale);
 
         g.append("g")
          .attr("transform", "translate(0," + height + ")")

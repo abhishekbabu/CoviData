@@ -86,14 +86,10 @@ async function loadHistoricalData(country) {
 
   // get date boundaries
   let minDateString = Object.keys(response.timeline.cases)[0];
-  let minDateValues = splitDateString(minDateString);
-  let minDate = new Date(minDateValues[0], minDateValues[1], minDateValues[2]);
-  console.log(minDate);
+  let minDate = getDate(minDateString);
 
   let maxDateString = Object.keys(response.timeline.cases)[29];
-  let maxDateValues = splitDateString(maxDateString);
-  let maxDate = new Date(maxDateValues[0], maxDateValues[1], maxDateValues[2]);
-  console.log(maxDate);
+  let maxDate = getDate(maxDateString);
 
   // get max cases for y boundary
   let cases = Object.values(response.timeline.cases)
@@ -138,22 +134,30 @@ async function loadHistoricalData(country) {
     .append('g')
     .call(d3.axisLeft(yScale));
 
+  historicalData = [];
+  for (var i = 0; i < Object.keys(response.timeline.cases).length; i++) {
+    let dataPoint = {};
+    dataPoint.date = Object.keys(response.timeline.cases)[i];
+    dataPoint.cases = Object.values(response.timeline.cases)[i];
+    historicalData.push(dataPoint);
+  }
+  console.log(historicalData)
+
   // code to plot data --  not working
-  sVg.selectAll().data(response.timeline.cases)
+  sVg.selectAll("svg").data(historicalData)
     .enter().append("rect")
-    .attr("x", function(d) {
-      let date = splitDateString(d);
-      return xScale(new Date(date[0], date[1], date[2]));
-    })
-    .attr("y", function(d) { return yScale(d.value) })
-    .attr("height", function(d) { return height - yScale(d.value) });
+    .attr("class", "bar")
+    .attr("x", function(d) { return xScale(getDate(d.date)) })
+    .attr("y", function(d) { return yScale(d.cases) })
+    .attr("height", function(d) { return height - yScale(d.cases) })
+    .attr("fill", "red");
 }
 
 // splits a date string and returns the year, month and date
-function splitDateString(dateString) {
+function getDate(dateString) {
   let res = dateString.split("/");
   let month = parseInt(res[0]) - 1;
   let date = parseInt(res[1]);
   let year = parseInt("20" + res[2]);
-  return [year, month, date];
+  return new Date(year, month, date);
 }

@@ -149,6 +149,7 @@ async function loadHistoricalData(country) {
     .attr("class", "bar")
     .attr("x", function(d) { return xScale(getDate(d.date)) })
     .attr("y", function(d) { return yScale(d.cases) })
+    .attr("width", 10)
     .attr("height", function(d) { return height - yScale(d.cases) })
     .attr("fill", "red");
 }

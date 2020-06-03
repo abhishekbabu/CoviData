@@ -15,7 +15,7 @@
     <header>COVID-19 Stats</header>
     <br>
     
-    <label id="countrySelectLabel">Select a Country:&emsp;&nbsp;</label>
+    <label id="countrySelectLabel">Select a Country:&emsp;</label>
     <select id="countrySel">
       <option value="" disable selected hidden>Select a country...</option>
     </select>
@@ -23,15 +23,46 @@
   
     <p id="loading">&nbsp;</p>
 
-    <svg id="chart" width="500" height="350"></svg>  
+    <svg id="chart" width="550" height="300"></svg>
+    <br>
 
-    <ul>
-      <li id="active">Active: -</li>
-      <li id="cases">Cases: -</li>
-      <li id="recovered">Recovered: -</li>
-      <li id="deaths">Deaths: -</li>
-      <li id="population">Population: -</li>
-    </ul>
+    <div class="card-container">
+      <div class="card">
+        <div class="container">
+          <h4>Active:</h4>
+          <p id="active">-</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="container">
+          <h4>Cases:</h4>
+          <p id="cases">-</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="container">
+          <h4>Recovered:</h4>
+          <p id="recovered">-</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="container">
+          <h4>Deaths:</h4>
+          <p id="deaths">-</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="container">
+          <h4>Population:</h4>
+          <p id="population">-</p>
+        </div>
+      </div>
+    </div>
+
   </body>
 
 </html>

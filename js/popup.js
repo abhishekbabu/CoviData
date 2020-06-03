@@ -24,29 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }, false);
 });
 
-Date.prototype.today = function () { 
-  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
-}
-
-// For the time now
-Date.prototype.timeNow = function () {
-   return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-}
-
 async function loadCountryData(country) {
   chrome.storage.sync.set({"selectedCountry": country});
   console.log(country);
   document.getElementById("loading").innerHTML = "Loading...";
   let response = await getCountryData(country);
   document.getElementById("flag").src = response.countryInfo.flag;
-  document.getElementById("active").innerHTML = `Active: ${response.active.toLocaleString()}`;
-  document.getElementById("cases").innerHTML = `Cases: ${response.cases.toLocaleString()}`;
-  document.getElementById("recovered").innerHTML = `Recovered: ${response.recovered.toLocaleString()}`;
-  document.getElementById("deaths").innerHTML = `Deaths: ${response.deaths.toLocaleString()}`;
-  document.getElementById("population").innerHTML = `Population: ${response.population.toLocaleString()}`;
-  var currDate = new Date();
-  var lastSync = "Data last updated: " + currDate.today() + " at " + currDate.timeNow();
-  document.getElementById("loading").innerHTML = `${lastSync}`;
+  document.getElementById("active").innerHTML = `${response.active.toLocaleString()}`;
+  document.getElementById("cases").innerHTML = `${response.cases.toLocaleString()}`;
+  document.getElementById("recovered").innerHTML = `${response.recovered.toLocaleString()}`;
+  document.getElementById("deaths").innerHTML = `${response.deaths.toLocaleString()}`;
+  document.getElementById("population").innerHTML = `${response.population.toLocaleString()}`;
+  document.getElementById("loading").innerHTML = "Data last updated: " + new Date().toLocaleString();;
 }
 
 async function getCountryData(country) {
@@ -72,15 +61,21 @@ async function getHistoricalData(country) {
 }
 
 async function loadHistoricalData(country) {
-  // sample code from: https://www.d3-graph-gallery.com/intro_d3js.html
-
   let response = await getHistoricalData(country);
   console.log(response);
 
   // historical data not available
   if (response.hasOwnProperty('message')) {
-    document.getElementById("loading").innerHTML += " - Historical data unavailable for this country";
     d3.selectAll("svg > *").remove()
+
+    var svg = d3.select("#chart");
+    var text = svg.append("text")
+      .attr("x", 275)
+      .attr("y", 175)
+      .style("font-size", "36px")
+      .style("text-anchor", "middle");
+    
+      text.text("Historical data unavailable");
     return;
   }
 
@@ -98,8 +93,8 @@ async function loadHistoricalData(country) {
 
   // set the dimensions and margins of the graph
   var margin = {top: 10, right: 30, bottom: 50, left: 60},
-  width = 500 - margin.left - margin.right,
-  height = 350 - margin.top - margin.bottom;
+  width = 550 - margin.left - margin.right,
+  height = 300 - margin.top - margin.bottom;
 
   // clear graph to reload new axes
   d3.selectAll("svg > *").remove()
@@ -159,7 +154,7 @@ async function loadHistoricalData(country) {
         .duration(200)
         .style("opacity", 1);
       tooltip.html("Cases: " + d.cases + "<br>" + "Date: " + d.date)
-        .style("left", (d3.event.pageX + 5) + "px")
+        .style("left", (d3.event.pageX - 63) + "px")
         .style("top", (d3.event.pageY - 28) + "px")
     })
     .on("mouseout", function(d) {

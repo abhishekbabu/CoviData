@@ -53,8 +53,8 @@ select:focus {
 
 .overlay {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 85%;
+  left: 0;
 }
 
 .bar {

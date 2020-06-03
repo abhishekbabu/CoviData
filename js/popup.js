@@ -79,7 +79,7 @@ async function loadHistoricalData(country) {
 
   // historical data not available
   if (response.hasOwnProperty('message')) {
-    document.getElementById("loading").innerHTML += " - Historical data unavailabe for this country";
+    document.getElementById("loading").innerHTML += " - Historical data unavailable for this country";
     d3.selectAll("svg > *").remove()
     return;
   }
@@ -151,7 +151,6 @@ async function loadHistoricalData(country) {
     .attr("y", function(d) { return yScale(d.cases) })
     .attr("width", 10)
     .attr("height", function(d) { return height - yScale(d.cases) })
-    .attr("fill", "red");
 }
 
 // splits a date string and returns the year, month and date

@@ -14,18 +14,16 @@
   <body>
     <header>COVID-19 Stats</header>
     <br>
+    
     <label id="countrySelectLabel">Select a Country:&emsp;&nbsp;</label>
     <select id="countrySel">
       <option value="" disable selected hidden>Select a country...</option>
     </select>
+    <img id="flag" alt="Image" height="40" width="auto">
+  
     <p id="loading">&nbsp;</p>
 
-    <div class="wrapper">
-      <div class="ploty">
-        <svg id="chart" width="500" height="350"></svg>
-      </div>
-      <img class="overlay" id="flag" alt="Image" height="20" width="auto">
-    </div>
+    <svg id="chart" width="500" height="350"></svg>  
 
     <ul>
       <li id="active">Active: -</li>

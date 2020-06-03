@@ -106,7 +106,6 @@ async function loadHistoricalData(country) {
 
   // append the svg object to the body of the page
   var sVg = d3.select("#chart")
-    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -143,14 +142,31 @@ async function loadHistoricalData(country) {
   }
   console.log(historicalData)
 
+  // add the tooltip area to the webpage
+  var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0)
+
   // code to plot data --  not working
   sVg.selectAll("svg").data(historicalData)
-    .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return xScale(getDate(d.date)) })
-    .attr("y", function(d) { return yScale(d.cases) })
-    .attr("width", 10)
-    .attr("height", function(d) { return height - yScale(d.cases) })
+    .enter().append("circle")
+    .attr("class", "point")
+    .attr("cx", function(d) { return xScale(getDate(d.date)) })
+    .attr("cy", function(d) { return yScale(d.cases) })
+    .attr("r", 4)
+    .on("mouseover", function(d) {
+      tooltip.transition()
+        .duration(200)
+        .style("opacity", 1);
+      tooltip.html("Cases: " + d.cases + "<br>" + "Date: " + d.date)
+        .style("left", (d3.event.pageX + 5) + "px")
+        .style("top", (d3.event.pageY - 28) + "px")
+    })
+    .on("mouseout", function(d) {
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 0);
+    })
 }
 
 // splits a date string and returns the year, month and date

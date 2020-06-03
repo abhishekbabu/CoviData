@@ -20,7 +20,7 @@ label {
 /* Select style */
 select {
   display: inline-block;
-  width: 70%;
+  width: 60%;
   height: 35px;
   font-size: 100%;
   font-weight: bold;
@@ -37,6 +37,10 @@ select {
   transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
+img {
+  vertical-align: middle;
+}
+
 select:hover {
   color: #c0392b;
   background-color: white;
@@ -47,25 +51,21 @@ select:focus {
   outline: none;
 }
 
-.wrapper {
-  position: relative;
-}
-
-.overlay {
-  position: absolute;
-  top: 85%;
-  left: 0;
-}
-
-.bar {
+.point {
   fill: #c0392b;
 }
 
-/* Image style */
-img {
-  resize: both;
+#flag {
+  margin-left: 10px;
+  border: 2px solid black;
 }
 
-#flag {
-  border: 2px solid black;
+.tooltip {
+  position: absolute;
+  width: 100px;
+  height: 33px;
+  pointer-events: none;
+  background-color: #DCDCDC;
+  text-align: center;
+  font-weight: bold;
 }

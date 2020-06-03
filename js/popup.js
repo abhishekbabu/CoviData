@@ -153,9 +153,9 @@ async function loadHistoricalData(country) {
       tooltip.transition()
         .duration(200)
         .style("opacity", 1);
-      tooltip.html("Cases: " + d.cases + "<br>" + "Date: " + d.date)
-        .style("left", (d3.event.pageX - 63) + "px")
-        .style("top", (d3.event.pageY - 28) + "px")
+      tooltip.html("Date: " + d.date + "<br>" + "Cases: " + d.cases)
+        .style("left", (d3.event.pageX - 66) + "px")
+        .style("top", (d3.event.pageY - 35) + "px")
     })
     .on("mouseout", function(d) {
       tooltip.transition()

@@ -12,7 +12,9 @@ async function GetCountryList() {
     console.log(parsed);
     let unsorted = {};
     for (const model in parsed) {
-      unsorted[parsed[model].country] = parsed[model].countryInfo.iso3;
+      if (parsed[model].countryInfo.iso3 !== null) {
+        unsorted[parsed[model].country] = parsed[model].countryInfo.iso3;
+      }
     }
 
     var keys = Object.keys(unsorted);

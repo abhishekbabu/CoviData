@@ -29,6 +29,9 @@ async function loadCountryData(country) {
   console.log(country);
   document.getElementById("loading").innerHTML = "Loading...";
   let response = await getCountryData(country);
+  if (response.hasOwnProperty('message')) {
+    return;
+  }
   document.getElementById("flag").src = response.countryInfo.flag;
   document.getElementById("active").innerHTML = `${response.active.toLocaleString()}`;
   document.getElementById("cases").innerHTML = `${response.cases.toLocaleString()}`;

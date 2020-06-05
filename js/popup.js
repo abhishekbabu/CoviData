@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   chrome.storage.sync.get("selectedCountry", function(data) {
-    if (data.selectedCountry.length > 0) {
+    if (data.selectedCountry !== undefined && data.selectedCountry.length > 0) {
       countrySelect.value = data.selectedCountry;
       loadCountryData(countrySelect.value);
       loadHistoricalData(countrySelect.value);
@@ -145,7 +145,7 @@ async function loadHistoricalData(country) {
     .attr("class", "tooltip")
     .style("opacity", 0)
 
-  // code to plot data --  not working
+  // code to plot data 
   sVg.selectAll("svg").data(historicalData)
     .enter().append("circle")
     .attr("class", "point")
@@ -153,14 +153,16 @@ async function loadHistoricalData(country) {
     .attr("cy", function(d) { return yScale(d.cases) })
     .attr("r", 4)
     .on("mouseover", function(d) {
+      d3.select(this).attr("class", "highlight");
       tooltip.transition()
-        .duration(200)
+        .duration(100)
         .style("opacity", 1);
       tooltip.html("Date: " + d.date + "<br>" + "Cases: " + d.cases)
         .style("left", (d3.event.pageX - 66) + "px")
-        .style("top", (d3.event.pageY - 35) + "px")
+        .style("top", (d3.event.pageY - 50) + "px")
     })
     .on("mouseout", function(d) {
+      d3.select(this).attr("class", "point");
       tooltip.transition()
         .duration(500)
         .style("opacity", 0);

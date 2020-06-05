@@ -1,5 +1,7 @@
 const COUNTRIES_URL = "https://disease.sh/v2/countries";
 
+let problematic = ["CIV", "LAO"];
+
 chrome.runtime.onInstalled.addListener(() => {
   console.log("installed");
   GetCountryList();
@@ -12,7 +14,7 @@ async function GetCountryList() {
     console.log(parsed);
     let unsorted = {};
     for (const model in parsed) {
-      if (parsed[model].countryInfo.iso3 !== null) {
+      if (parsed[model].countryInfo.iso3 !== null && !problematic.includes(parsed[model].countryInfo.iso3)) {
         unsorted[parsed[model].country] = parsed[model].countryInfo.iso3;
       }
     }

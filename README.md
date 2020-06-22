@@ -1,4 +1,4 @@
-# COVID-19 Stats
+# CoviData
 Quick access and convenient dashboard extension for statistics regarding the COVID-19 global pandemic.
 
 ![](assets/img/screenshot.png)

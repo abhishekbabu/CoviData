@@ -7,10 +7,10 @@
 
   "homepage_url": "https://github.com/abhishekbabu/covid19-stats-extension",
   "icons": {
-    "16": "assets/covid-stats16.png",
-    "32": "assets/covid-stats32.png",
-    "48": "assets/covid-stats48.png",
-    "128": "assets/covid-stats128.png"
+    "16": "assets/covidata16.png",
+    "32": "assets/covidata32.png",
+    "48": "assets/covidata48.png",
+    "128": "assets/covidata128.png"
   },
 
   "background": {
@@ -21,10 +21,10 @@
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_icon": {
-      "16": "assets/covid-stats16.png",
-      "32": "assets/covid-stats32.png",
-      "48": "assets/covid-stats48.png",
-      "128": "assets/covid-stats128.png"
+      "16": "assets/covidata16.png",
+      "32": "assets/covidata32.png",
+      "48": "assets/covidata48.png",
+      "128": "assets/covidata128.png"
     }
   },
   "content_security_policy": "script-src 'self' https://d3js.org/d3.v5.min.js 'unsafe-eval'; object-src 'self'"
